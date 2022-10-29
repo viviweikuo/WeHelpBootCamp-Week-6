@@ -1,4 +1,3 @@
-from unittest import result
 from flask import Flask
 from flask import request 
 from flask import render_template
@@ -18,7 +17,7 @@ Assignment6.secret_key = "大正紅茶拿鐵微糖去冰"
 website = mysql.connector.connect(
     host="localhost",
     user="viviweikuo",
-    password="zxcvbnmM12*",
+    password="****",
     database="website"
 )
 
