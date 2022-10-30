@@ -17,7 +17,7 @@ Assignment6.secret_key = "大正紅茶拿鐵微糖去冰"
 website = mysql.connector.connect(
     host="localhost",
     user="viviweikuo",
-    password="****",
+    password="zxcvbnmM12*",
     database="website"
 )
 
@@ -39,7 +39,7 @@ def signup():
     search_result = mycursor.rowcount
 
     if (search_result == 1):
-        return redirect(url_for("error", error_message = "此帳號已被註冊"))
+        return redirect(url_for("error", message = "此帳號已被註冊"))
     else:
         session["name"] =  member_new_name
         session["username"] = member_new_username
@@ -66,7 +66,7 @@ def signin():
         session["password"] = member_password
         return redirect("/member")
     else:
-        return redirect(url_for("error", error_message = "帳號或密碼輸入錯誤"))
+        return redirect(url_for("error", message = "帳號或密碼輸入錯誤"))
 
 @Assignment6.route("/member")
 def member():
@@ -81,8 +81,8 @@ def member():
 
 @Assignment6.route("/error")
 def error():
-    result = request.args.get("error_message")
-    return render_template("error.html", error_message = result)
+    result = request.args.get("message")
+    return render_template("error.html", message = result)
 
 @Assignment6.route("/signout")
 def signout():
@@ -93,8 +93,10 @@ def signout():
 
 @Assignment6.route("/message", methods=["POST"])
 def message():
+
+    # 要抓member_id
     member_message = request.form["message"]
-    message_add = "INSERT INTO message(content) VALUES(%s)"
+    message_add = "INSERT INTO message(member_id, content) VALUES(%s, %s)"
     value = member_message
     mycursor.execute(message_add, (value,))
     website.commit()
