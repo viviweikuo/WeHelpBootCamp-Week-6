@@ -15,10 +15,10 @@ Assignment6 = Flask(
 Assignment6.secret_key = "大正紅茶拿鐵微糖去冰"
 
 website = mysql.connector.connect(
-    host="localhost",
-    user="viviweikuo",
-    password="****",
-    database="website"
+    host = "localhost",
+    user = "viviweikuo",
+    password = "****",
+    database = "website"
 )
 
 mycursor = website.cursor(buffered=True)
